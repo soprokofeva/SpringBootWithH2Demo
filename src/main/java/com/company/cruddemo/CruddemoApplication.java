@@ -10,37 +10,50 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class CruddemoApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(CruddemoApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(CruddemoApplication.class, args);
+    }
 
-	@Bean
-	public CommandLineRunner commandLineRunner(StudentDAO studentDAO) {
-		return runner -> {
-			createStudent(studentDAO);
-			createStudents(studentDAO);
-		};
-	}
+    @Bean
+    public CommandLineRunner commandLineRunner(StudentDAO studentDAO) {
+        return runner -> {
+            createStudent(studentDAO);
+            createStudents(studentDAO);
+            readStudent(studentDAO);
+        };
+    }
 
-	private void createStudents(StudentDAO studentDAO) {
-		Student theStudent = new Student("Bilbo", "Begins", "bbegins@middleEarth.com");
-		Student theStudent2 = new Student("Harry", "Potter", "hpotter@hogwarts.com");
-		Student theStudent3 = new Student("Pinkie", "Pie", "ppie@ponyville.com");
+    private void readStudent(StudentDAO studentDAO) {
+        System.out.println("Creating mew student");
+        Student theStudent = new Student("Aslan", "Leo", "aslanleo@narnia.com");
+        System.out.println("Saving the student: " + theStudent);
+        studentDAO.save(theStudent);
+        int id = theStudent.getId();
+        System.out.println("Saved student. Id: " + id);
 
-		System.out.println("Saving the students");
+        System.out.println("Retrieving student by the id: " + id);
+        Student foundStudent = studentDAO.findById(id);
+        System.out.println("Found student: " + foundStudent);
 
-		studentDAO.save(theStudent);
-		studentDAO.save(theStudent2);
-		studentDAO.save(theStudent3);
+    }
 
-	}
+    private void createStudents(StudentDAO studentDAO) {
+        Student theStudent = new Student("Bilbo", "Begins", "bbegins@middleEarth.com");
+        Student theStudent2 = new Student("Harry", "Potter", "hpotter@hogwarts.com");
+        Student theStudent3 = new Student("Pinkie", "Pie", "ppie@ponyville.com");
 
-	private void createStudent(StudentDAO studentDAO) {
-		System.out.println("Creating mew student");
-		Student theStudent = new Student("Frodo", "Begins", "fbegins@middleEarth.com");
-		System.out.println("Saving the student: " + theStudent);
-		studentDAO.save(theStudent);
-		System.out.println("Saved student. Id: " + theStudent.getId());
+        System.out.println("Saving the students");
 
-	}
+        studentDAO.save(theStudent);
+        studentDAO.save(theStudent2);
+        studentDAO.save(theStudent3);
+    }
+
+    private void createStudent(StudentDAO studentDAO) {
+        System.out.println("Creating mew student");
+        Student theStudent = new Student("Frodo", "Begins", "fbegins@middleEarth.com");
+        System.out.println("Saving the student: " + theStudent);
+        studentDAO.save(theStudent);
+        System.out.println("Saved student. Id: " + theStudent.getId());
+    }
 }
