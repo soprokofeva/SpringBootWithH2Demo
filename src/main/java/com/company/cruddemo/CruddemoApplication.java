@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import java.util.List;
+import java.util.Optional;
 
 @SpringBootApplication
 public class CruddemoApplication {
@@ -24,7 +25,19 @@ public class CruddemoApplication {
             readStudent(studentDAO);
             queryStudents(studentDAO);
             queryStudentsByLastName(studentDAO);
+            updateStudentLastName(studentDAO);
         };
+    }
+
+    private void updateStudentLastName(StudentDAO studentDAO) {
+        List<Student> students = studentDAO.findByLastName("Pie");
+        if (!students.isEmpty()) {
+            Student student = students.get(0);
+            System.out.println("Updating...");
+            student.setLastName("Crazy");
+            studentDAO.update(student);
+            System.out.println("Updated student: " + student);
+        }
     }
 
     private void queryStudentsByLastName(StudentDAO studentDAO) {
