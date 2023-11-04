@@ -5,5 +5,6 @@ import com.company.cruddemo.entity.Instructor;
 public interface AppDAO {
 
     void save(Instructor instructor);
-    Instructor findById(int id);
+    Instructor findInstructorById(int id);
+    void deleteInstructorById(int id);
 }

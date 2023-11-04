@@ -1,17 +1,12 @@
 package com.company.cruddemo;
 
 import com.company.cruddemo.dao.AppDAO;
-import com.company.cruddemo.dao.StudentDAO;
 import com.company.cruddemo.entity.Instructor;
 import com.company.cruddemo.entity.InstructorDetail;
-import com.company.cruddemo.entity.Student;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-
-import java.util.List;
-import java.util.Optional;
 
 @SpringBootApplication
 public class CruddemoApplication {
@@ -25,12 +20,18 @@ public class CruddemoApplication {
         return runner -> {
             createInstructor(appDAO);
             findInstructorById(appDAO);
+            deleteInstructorById(appDAO);
         };
+    }
+
+    private void deleteInstructorById(AppDAO appDAO) {
+        int id = 2;
+        appDAO.deleteInstructorById(id);
     }
 
     private void findInstructorById(AppDAO appDAO) {
         int id = 1;
-        Instructor instructor = appDAO.findById(id);
+        Instructor instructor = appDAO.findInstructorById(id);
         if (instructor != null) {
             System.out.println(instructor);
             System.out.println(instructor.getInstructorDetail());
