@@ -27,7 +27,7 @@ public class CruddemoApplication {
     }
 
     private void deleteInstructorDetailById(AppDAO appDAO) {
-        int id = 3;
+        int id = 4;
         appDAO.deleteInstructorDetailById(id);
     }
 
