@@ -21,9 +21,14 @@ public class CruddemoApplication {
             createInstructor(appDAO);
             findInstructorById(appDAO);
             deleteInstructorById(appDAO);
-
             findInstructorDetailById(appDAO);
+            deleteInstructorDetailById(appDAO);
         };
+    }
+
+    private void deleteInstructorDetailById(AppDAO appDAO) {
+        int id = 3;
+        appDAO.deleteInstructorDetailById(id);
     }
 
     private void findInstructorDetailById(AppDAO appDAO) {
@@ -55,17 +60,17 @@ public class CruddemoApplication {
     }
 
     private void createInstructor(AppDAO appDAO) {
-//        Instructor instructor = new Instructor(
-//                "Albus",
-//                "Dumbledore",
-//                "albusdumbledore@hogwarts.com");
-//
-//        InstructorDetail detail = new InstructorDetail(
-//                "https://www.youtube.com/hogwarts_school",
-//                "Magic");
-//
-//        instructor.setInstructorDetail(detail);
-//        appDAO.save(instructor);
+        Instructor instructor = new Instructor(
+                "Albus",
+                "Dumbledore",
+                "albusdumbledore@hogwarts.com");
+
+        InstructorDetail detail = new InstructorDetail(
+                "https://www.youtube.com/hogwarts_school",
+                "Magic");
+
+        instructor.setInstructorDetail(detail);
+        appDAO.save(instructor);
 
         Instructor instructor2 = new Instructor(
                 "Meow",
