@@ -6,6 +6,9 @@ DROP SEQUENCE IF EXISTS instructor_detail_seq;
 DROP TABLE IF EXISTS instructor;
 DROP SEQUENCE IF EXISTS instructor_seq;
 
+DROP TABLE IF EXISTS course;
+DROP SEQUENCE IF EXISTS course_seq;
+
 
 DROP SCHEMA IF EXISTS student_tracker;
 
@@ -48,4 +51,14 @@ CREATE TABLE IF NOT EXISTS instructor (
     instructor_detail_id INT,
     PRIMARY KEY(id),
     FOREIGN KEY(instructor_detail_id) REFERENCES instructor_detail(id)
+);
+
+CREATE SEQUENCE course_seq NO CACHE NO CYCLE INCREMENT BY 1;
+
+CREATE TABLE IF NOT EXISTS course (
+    id INT NOT NULL DEFAULT course_seq.nextval,
+    title VARCHAR(255) UNIQUE,
+    instructor_id INT,
+    PRIMARY KEY(id),
+    FOREIGN KEY(instructor_id) REFERENCES instructor(id)
 );

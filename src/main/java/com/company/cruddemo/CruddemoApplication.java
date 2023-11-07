@@ -1,6 +1,7 @@
 package com.company.cruddemo;
 
 import com.company.cruddemo.dao.AppDAO;
+import com.company.cruddemo.entity.Course;
 import com.company.cruddemo.entity.Instructor;
 import com.company.cruddemo.entity.InstructorDetail;
 import org.springframework.boot.CommandLineRunner;
@@ -18,12 +19,47 @@ public class CruddemoApplication {
     @Bean
     public CommandLineRunner commandLineRunner(AppDAO appDAO) {
         return runner -> {
-            createInstructor(appDAO);
-            findInstructorById(appDAO);
-            deleteInstructorById(appDAO);
-            findInstructorDetailById(appDAO);
-            deleteInstructorDetailById(appDAO);
+//            createInstructor(appDAO);
+//            findInstructorById(appDAO);
+//            deleteInstructorById(appDAO);
+//            findInstructorDetailById(appDAO);
+//            deleteInstructorDetailById(appDAO);
+
+            createInstructorWithCourses(appDAO);
         };
+    }
+
+    private void createInstructorWithCourses(AppDAO appDAO) {
+//        Instructor instructor = new Instructor(
+//                "Pinkie",
+//                "Pie",
+//                "pinkiepie@eqwestria.com");
+//
+//        InstructorDetail detail = new InstructorDetail(
+//                "https://www.youtube.com/eqwestria_pinkie",
+//                "Fun");
+//        instructor.setInstructorDetail(detail);
+//
+//        Course courseP1 = new Course("Friendship is fun");
+//        Course courseP2 = new Course("Make more fun");
+//        instructor.addCourse(courseP1);
+//        instructor.addCourse(courseP2);
+//        appDAO.save(instructor);
+
+        Instructor instructor2 = new Instructor(
+                "Twilight",
+                "Sparkle",
+                "twilightsparkle@eqwestria.com");
+
+        InstructorDetail detail2 = new InstructorDetail(
+                "https://www.youtube.com/eqwestria_twilight",
+                "Magic");
+        instructor2.setInstructorDetail(detail2);
+        Course courseT1 = new Course("Friendship is magic");
+        Course courseT2 = new Course("Make more magic");
+        instructor2.addCourse(courseT1);
+        instructor2.addCourse(courseT2);
+        appDAO.save(instructor2);
     }
 
     private void deleteInstructorDetailById(AppDAO appDAO) {
