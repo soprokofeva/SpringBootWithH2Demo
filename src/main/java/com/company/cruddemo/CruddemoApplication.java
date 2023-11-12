@@ -34,14 +34,10 @@ public class CruddemoApplication {
 
     private void findCoursesForInstructor(AppDAO appDAO) {
         int id = 6;
-        Instructor instructor = appDAO.findInstructorById(id);
+        Instructor instructor = appDAO.findInstructorByJoinFetch(id);
         if (instructor != null) {
             System.out.println("Instructor with the id " + id + " exists");
             System.out.println(instructor);
-
-            List<Course> courses = appDAO.findCoursesByInstructorId(id);
-            instructor.setCourses(courses);
-
             System.out.println("Instructor's courses: " + instructor.getCourses());
         } else {
             System.out.println("There is no instructor with id " + id);
