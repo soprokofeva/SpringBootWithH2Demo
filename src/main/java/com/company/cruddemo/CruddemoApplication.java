@@ -9,8 +9,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import java.util.List;
-
 @SpringBootApplication
 public class CruddemoApplication {
 
@@ -28,8 +26,22 @@ public class CruddemoApplication {
 //            deleteInstructorDetailById(appDAO);
 
 //            createInstructorWithCourses(appDAO);
-            findCoursesForInstructor(appDAO);
+//            findCoursesForInstructor(appDAO);
+            updateInstructorLastName(appDAO);
         };
+    }
+
+    private void updateInstructorLastName(AppDAO appDAO) {
+        int id = 6;
+        Instructor instructor = appDAO.findInstructorById(id);
+        if (instructor != null) {
+            System.out.println("Instructor with the id " + id + " exists");
+            instructor.setLastName("TEST");
+            appDAO.updateInstructor(instructor);
+
+        } else {
+            System.out.println("There is no instructor with id " + id);
+        }
     }
 
     private void findCoursesForInstructor(AppDAO appDAO) {
