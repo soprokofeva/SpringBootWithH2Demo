@@ -27,8 +27,22 @@ public class CruddemoApplication {
 
 //            createInstructorWithCourses(appDAO);
 //            findCoursesForInstructor(appDAO);
-            updateInstructorLastName(appDAO);
+//            updateInstructorLastName(appDAO);
+            updateCourse(appDAO);
         };
+    }
+
+    private void updateCourse(AppDAO appDAO) {
+        int id = 1;
+        Course course = appDAO.findCourseById(id);
+        if (course != null) {
+            System.out.println(course);
+            course.setTitle("TESTING COURSE");
+            appDAO.updateCourse(course);
+            System.out.println("The course has been updated");
+        } else {
+            System.out.println("There is no course with id: " + id);
+        }
     }
 
     private void updateInstructorLastName(AppDAO appDAO) {
