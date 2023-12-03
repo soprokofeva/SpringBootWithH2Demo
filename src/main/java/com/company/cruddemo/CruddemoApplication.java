@@ -21,7 +21,7 @@ public class CruddemoApplication {
         return runner -> {
 //            createInstructor(appDAO);
 //            findInstructorById(appDAO);
-            deleteInstructorById(appDAO);
+//            deleteInstructorById(appDAO);
 //            findInstructorDetailById(appDAO);
 //            deleteInstructorDetailById(appDAO);
 
@@ -29,7 +29,13 @@ public class CruddemoApplication {
 //            findCoursesForInstructor(appDAO);
 //            updateInstructorLastName(appDAO);
 //            updateCourse(appDAO);
+            deleteCourse(appDAO);
         };
+    }
+
+    private void deleteCourse(AppDAO appDAO) {
+        int id = 4;
+        appDAO.deleteCourseById(id);
     }
 
     private void updateCourse(AppDAO appDAO) {
