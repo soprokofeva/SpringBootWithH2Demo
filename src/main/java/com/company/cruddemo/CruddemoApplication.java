@@ -21,14 +21,14 @@ public class CruddemoApplication {
         return runner -> {
 //            createInstructor(appDAO);
 //            findInstructorById(appDAO);
-//            deleteInstructorById(appDAO);
+            deleteInstructorById(appDAO);
 //            findInstructorDetailById(appDAO);
 //            deleteInstructorDetailById(appDAO);
 
 //            createInstructorWithCourses(appDAO);
 //            findCoursesForInstructor(appDAO);
 //            updateInstructorLastName(appDAO);
-            updateCourse(appDAO);
+//            updateCourse(appDAO);
         };
     }
 
@@ -121,7 +121,7 @@ public class CruddemoApplication {
     }
 
     private void deleteInstructorById(AppDAO appDAO) {
-        int id = 2;
+        int id = 6;
         appDAO.deleteInstructorById(id);
     }
 
