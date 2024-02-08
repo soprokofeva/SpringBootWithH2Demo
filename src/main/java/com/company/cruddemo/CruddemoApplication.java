@@ -4,6 +4,7 @@ import com.company.cruddemo.dao.AppDAO;
 import com.company.cruddemo.entity.Course;
 import com.company.cruddemo.entity.Instructor;
 import com.company.cruddemo.entity.InstructorDetail;
+import com.company.cruddemo.entity.Review;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -29,8 +30,40 @@ public class CruddemoApplication {
 //            findCoursesForInstructor(appDAO);
 //            updateInstructorLastName(appDAO);
 //            updateCourse(appDAO);
-            deleteCourse(appDAO);
+//            deleteCourse(appDAO);
+//            createCourseWithReviews(appDAO);
+//            findCourseWithReviews(appDAO);
+            deleteCourseWithReviews(appDAO);
         };
+    }
+
+    private void deleteCourseWithReviews(AppDAO appDAO) {
+        int id = 5;
+        appDAO.deleteCourseById(id);
+    }
+
+    private void findCourseWithReviews(AppDAO appDAO) {
+        int id = 5;
+        Course course = appDAO.findCourseWithReviewsByCourseId(id);
+        if (course != null) {
+            System.out.println(course);
+            System.out.println(course.getReviews());
+        } else {
+            System.out.println("There is no course with id: " + id);
+        }
+    }
+
+    private void createCourseWithReviews(AppDAO appDAO) {
+
+        Course course1 = new Course("Psychological course");
+        course1.addReview(new Review("How usefull information!"));
+        course1.addReview(new Review("Thanks!"));
+        course1.addReview(new Review("I hope it will help me"));
+
+        System.out.println(course1);
+        System.out.println(course1.getReviews());
+
+        appDAO.save(course1);
     }
 
     private void deleteCourse(AppDAO appDAO) {

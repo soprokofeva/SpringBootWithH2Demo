@@ -62,3 +62,12 @@ CREATE TABLE IF NOT EXISTS course (
     PRIMARY KEY(id),
     FOREIGN KEY(instructor_id) REFERENCES instructor(id)
 );
+
+CREATE SEQUENCE review_seq NO CACHE NO CYCLE INCREMENT BY 1;
+
+CREATE TABLE IF NOT EXISTS review (
+    id INT NOT NULL DEFAULT review_seq.nextval,
+    comment VARCHAR(255) UNIQUE,
+    PRIMARY KEY(id),
+    FOREIGN KEY(course_id) REFERENCES course(id)
+);
