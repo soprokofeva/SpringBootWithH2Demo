@@ -71,3 +71,11 @@ CREATE TABLE IF NOT EXISTS review (
     PRIMARY KEY(id),
     FOREIGN KEY(course_id) REFERENCES course(id)
 );
+
+CREATE TABLE IF NOT EXISTS course_student (
+    course_id INT NOT NULL,
+    student_id INT NOT NULL,
+    PRIMARY KEY(course_id, student_id),
+    FOREIGN KEY(course_id) REFERENCES course(id),
+    FOREIGN KEY(Student_id) REFERENCES student(id)
+);
