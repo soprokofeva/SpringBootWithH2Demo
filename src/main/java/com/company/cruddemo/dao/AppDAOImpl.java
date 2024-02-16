@@ -3,6 +3,7 @@ package com.company.cruddemo.dao;
 import com.company.cruddemo.entity.Course;
 import com.company.cruddemo.entity.Instructor;
 import com.company.cruddemo.entity.InstructorDetail;
+import com.company.cruddemo.entity.Student;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
@@ -111,7 +112,7 @@ public class AppDAOImpl implements AppDAO {
     }
 
     @Override
-    public Course findCourseWithReviewsByCourseId(int courseId) {
+    public Course findCourseWithReviewsByCourseId(int courseId) throws NoResultException  {
 
         TypedQuery<Course> query = entityManager.createQuery("select c from Course c"
                         + " JOIN FETCH c.reviews "
@@ -131,5 +132,22 @@ public class AppDAOImpl implements AppDAO {
 
         query.setParameter("idParam", courseId);
         return query.getSingleResult();
+    }
+
+    @Override
+    public Student findStudentWithCoursesByStudentId(int studentId) throws NoResultException {
+        TypedQuery<Student> query = entityManager.createQuery("select s from Student s"
+                        + " JOIN FETCH s.courses "
+                        + " where s.id = :idParam",
+                Student.class);
+
+        query.setParameter("idParam", studentId);
+        return query.getSingleResult();
+    }
+
+    @Override
+    @Transactional
+    public void update(Student student) {
+        entityManager.merge(student);
     }
 }

@@ -33,8 +33,43 @@ public class CruddemoApplication {
 //            findCourseWithReviews(appDAO);
 //            deleteCourseWithReviews(appDAO);
 //            createCourseAndStudents(appDAO);
-            findCourseWithStudents(appDAO);
+//            findCourseWithStudents(appDAO);
+//            findStudentWithCourses(appDAO);
+            addcoursesForStudent(appDAO);
         };
+    }
+
+    private void addcoursesForStudent(AppDAO appDAO) {
+        int id = 46;
+        try {
+            Student student = appDAO.findStudentWithCoursesByStudentId(id);
+            Course course1 = new Course("Hot to understand statistic method");
+            Course course2 = new Course("Data science");
+            student.addCourse(course1);
+            student.addCourse(course2);
+
+            System.out.println("Student: " + student);
+            System.out.println("Courses: " + student.getCourses());
+
+            appDAO.update(student);
+        } catch (NoResultException e) {
+            System.out.println("There is no student with id: " + id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void findStudentWithCourses(AppDAO appDAO) {
+        int id = 46;
+        try {
+            Student student = appDAO.findStudentWithCoursesByStudentId(id);
+            System.out.println("Student: " + student);
+            System.out.println("Courses: " + student.getCourses());
+        } catch (NoResultException e) {
+            System.out.println("There is no student with id: " + id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void findCourseWithStudents(AppDAO appDAO) {
