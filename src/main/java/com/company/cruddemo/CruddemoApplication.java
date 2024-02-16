@@ -35,7 +35,8 @@ public class CruddemoApplication {
 //            createCourseAndStudents(appDAO);
 //            findCourseWithStudents(appDAO);
 //            findStudentWithCourses(appDAO);
-            addcoursesForStudent(appDAO);
+//            addcoursesForStudent(appDAO);
+            deleteCourse(appDAO);
         };
     }
 
@@ -131,7 +132,7 @@ public class CruddemoApplication {
     }
 
     private void deleteCourse(AppDAO appDAO) {
-        int id = 4;
+        int id = 7;
         appDAO.deleteCourseById(id);
     }
 
