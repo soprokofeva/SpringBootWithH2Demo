@@ -1,10 +1,8 @@
 package com.company.cruddemo;
 
 import com.company.cruddemo.dao.AppDAO;
-import com.company.cruddemo.entity.Course;
-import com.company.cruddemo.entity.Instructor;
-import com.company.cruddemo.entity.InstructorDetail;
-import com.company.cruddemo.entity.Review;
+import com.company.cruddemo.entity.*;
+import jakarta.persistence.NoResultException;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -33,8 +31,37 @@ public class CruddemoApplication {
 //            deleteCourse(appDAO);
 //            createCourseWithReviews(appDAO);
 //            findCourseWithReviews(appDAO);
-            deleteCourseWithReviews(appDAO);
+//            deleteCourseWithReviews(appDAO);
+//            createCourseAndStudents(appDAO);
+            findCourseWithStudents(appDAO);
         };
+    }
+
+    private void findCourseWithStudents(AppDAO appDAO) {
+        int id = 6;
+        try {
+            Course course = appDAO.findCourseWithStudentsByCourseId(id);
+            System.out.println("Course: " + course);
+            System.out.println("Students: " + course.getStudents());
+        } catch (NoResultException e) {
+            System.out.println("There is no course with id: " + id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void createCourseAndStudents(AppDAO appDAO) {
+        Course course = new Course("How to understand math");
+
+        Student student1 = new Student("Bonnie", "Thunder", "bonniethunder@email.com");
+        Student student2 = new Student("Elsa", "Frozen", "elsafrozen@email.com");
+        Student student3 = new Student("Anna", "Frozen", "annafrozen@email.com");
+
+        course.addStudent(student1);
+        course.addStudent(student2);
+        course.addStudent(student3);
+
+        appDAO.save(course);
     }
 
     private void deleteCourseWithReviews(AppDAO appDAO) {
@@ -44,12 +71,14 @@ public class CruddemoApplication {
 
     private void findCourseWithReviews(AppDAO appDAO) {
         int id = 5;
-        Course course = appDAO.findCourseWithReviewsByCourseId(id);
-        if (course != null) {
+        try {
+            Course course = appDAO.findCourseWithReviewsByCourseId(id);
             System.out.println(course);
             System.out.println(course.getReviews());
-        } else {
+        } catch (NoResultException e) {
             System.out.println("There is no course with id: " + id);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

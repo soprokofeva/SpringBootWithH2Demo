@@ -4,6 +4,7 @@ import com.company.cruddemo.entity.Course;
 import com.company.cruddemo.entity.Instructor;
 import com.company.cruddemo.entity.InstructorDetail;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -116,6 +117,17 @@ public class AppDAOImpl implements AppDAO {
                         + " JOIN FETCH c.reviews "
                         + " where c.id = :idParam",
                         Course.class);
+
+        query.setParameter("idParam", courseId);
+        return query.getSingleResult();
+    }
+
+    @Override
+    public Course findCourseWithStudentsByCourseId(int courseId) throws NoResultException {
+        TypedQuery<Course> query = entityManager.createQuery("select c from Course c"
+                        + " JOIN FETCH c.students "
+                        + " where c.id = :idParam",
+                Course.class);
 
         query.setParameter("idParam", courseId);
         return query.getSingleResult();
